@@ -1,29 +1,20 @@
-![dRehmFlight Logo](https://github.com/nickrehm/dRehmFlight/blob/master/dRehmFlight%20Logo.png)
+# GeminiFlight (forked from dRehmFlight)
 
-[Intro Video](https://www.youtube.com/watch?v=tlD0C5CrWcA&lc=Ugx6m02xjHk8QH19vd94AaABAg)
+Currently forked to use proper Git flow for development. Long term focus on developing serial control from various supported companion computer platforms for extended autopilot ability in the software realm over the firmware realm.
 
-[RcGroups Support Thread](https://www.rcgroups.com/forums/showthread.php?3706571-dRehmFlight-VTOL-Teensy-Flight-Controller-and-Stabilization)
+Simple configurable firmware, with complex high level general purpose software control is our philosophy. Similar high level architecture to Klipper. Intended to be primarily flown in autopilot mode with manual flight only to record flight plans. GeminiFlight's primary use is to automate and orchestrate repetitive aerial missions across many drones. If you just wanna have fun, use [Betaflight](https://betaflight.com/).
 
-## Overview
+## Overview on dRehmFlight
 
 dRehmFlight is the flight controller for hobbyists, hackers, and non-coders interested in stabilizing their wacky and unique flying creations. The code and supporting documentation is built to bring someone up to speed on VTOL flight stabilization concepts as quickly and painlessly as possible. The code is written and presented in a way that is intuitive, easy to follow, and most importantly: all in one place. No more digging through countless folders and confusing classes just to add an 'if' statement for your custom drone application. This flight controller uses an Arduino-compatible microcontroller, so there is no confusing flashing or compiling process necessary. If you can use Arduino, you can start expanding the capabilites of this flight controller to your liking.
 
 dRehmFlight has been used as a teaching tool for aircraft stabilization and flight control principles in universities and tech companies around the world. It is not meant to out-perform other flight controller packages on the market, or be used in a commercial sense. It is best suited for rapid prototyping or allowing a radio control hobbyist to get their feet wet in flight control code for their VTOL project. Much more information is included in the dRehmFlight VTOL Documentation .pdf.
 
-This code is entirely free to use and will stay that way forever. If you found this helpful for your project, donations are appreciated: [Paypal Donation](https://www.paypal.me/NicholasRehm)
-
-**New in Beta 1.3:**
-
-- Spektrum DSM Satellite RX Support
-- One-time IMU calibration
-- ESC calibration functionality
-- Motor arming bug fix
-- Code and comment clean up
-- Small bug fixes
+This code is entirely free to use and will stay that way forever. We haven't made enough modifications yet to accept any donations but if you found this helpful for your own project, please donate to the OG of dRehmFlight and tell him I sent you: [Paypal Donation](https://www.paypal.me/NicholasRehm)
 
 
 ### Hardware Requirements
-This flight controller is based off of the Teensy 4.0 microcontroller and MPU6050 6DOF IMU. The following components (available on Amazon) are required to complete the flight controller assembly:
+This flight controller is based off of the Teensy 4.0 microcontroller and MPU9250 9DOF IMU. The following components (available on Amazon) are required to complete the flight controller assembly:
 
 
 **Teensy 4.0**: https://amzn.to/3oFG3QN
@@ -93,6 +84,3 @@ I would love to see your flying creations and maybe feature them here as well. P
 This code is a shared, open source flight controller for small micro aerial vehicles and is intended to be modified to suit your needs. It is NOT intended to be used on manned vehicles. I do not claim any responsibility for any damage or injury that may be inflicted as a result of the use of this code. Use and modify at your own risk. More specifically put:
 
 THIS SOFTWARE IS PROVIDED BY THE CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fnickrehm%2FdRehmFlight&count_bg=%23E30F0F&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
-

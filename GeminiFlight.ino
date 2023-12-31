@@ -31,15 +31,15 @@ Everyone that sends me pictures and videos of your flying creations! -Nick
 //========================================================================================================================//
 
 //Uncomment only one receiver type
-#define USE_PWM_RX
-//#define USE_PPM_RX
+// #define USE_PWM_RX
+#define USE_PPM_RX
 //#define USE_SBUS_RX
 //#define USE_DSM_RX
 static const uint8_t num_DSM_channels = 6; //If using DSM RX, change this to match the number of transmitter channels you have
 
 //Uncomment only one IMU
-#define USE_MPU6050_I2C //Default
-//#define USE_MPU9250_SPI
+// #define USE_MPU6050_I2C //Default
+#define USE_MPU9250_SPI
 
 //Uncomment only one full scale gyro range (deg/sec)
 #define GYRO_250DPS //Default
