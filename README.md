@@ -4,6 +4,8 @@ Currently forked to use proper Git flow for development. Long term focus on deve
 
 Simple configurable firmware, with complex high level general purpose software control is our philosophy. Similar high level architecture to Klipper. Intended to be primarily flown in autopilot mode with manual flight only to record flight plans. GeminiFlight's primary use is to automate and orchestrate repetitive aerial missions across many drones. If you just wanna have fun, use [Betaflight](https://betaflight.com/).
 
+Logged all my experiences in the Guides folder
+
 ## Overview on dRehmFlight
 
 dRehmFlight is the flight controller for hobbyists, hackers, and non-coders interested in stabilizing their wacky and unique flying creations. The code and supporting documentation is built to bring someone up to speed on VTOL flight stabilization concepts as quickly and painlessly as possible. The code is written and presented in a way that is intuitive, easy to follow, and most importantly: all in one place. No more digging through countless folders and confusing classes just to add an 'if' statement for your custom drone application. This flight controller uses an Arduino-compatible microcontroller, so there is no confusing flashing or compiling process necessary. If you can use Arduino, you can start expanding the capabilites of this flight controller to your liking.

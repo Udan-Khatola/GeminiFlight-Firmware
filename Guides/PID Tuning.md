@@ -1,4 +1,5 @@
-**IMPORTANT: Note all default PID values for increment reference**
+### **IMPORTANT: Note all default PID values for increment reference**
+Please note that this process requires individual treatment of each axis which can be done at the same time, but should be thought of as independent things being tuned.
 
 
 ## Basic Stability Tuning
