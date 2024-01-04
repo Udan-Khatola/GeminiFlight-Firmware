@@ -9,7 +9,7 @@
 //This file contains all necessary functions and code used for radio communication to avoid cluttering the main code
 
 unsigned long rising_edge_start_1, rising_edge_start_2, rising_edge_start_3, rising_edge_start_4, rising_edge_start_5, rising_edge_start_6; 
-unsigned long channel_1_raw, channel_2_raw, channel_3_raw, channel_4_raw, channel_5_raw, channel_6_raw;
+unsigned long channel_1_raw, channel_2_raw, channel_3_raw, channel_4_raw, channel_5_raw, channel_6_raw, channel_7_raw, channel_8_raw;
 int ppm_counter = 0;
 unsigned long time_ms = 0;
 
@@ -51,6 +51,9 @@ void radioSetup() {
   #else
     #error No RX type defined...
   #endif
+
+  //MAVLINK via Serial
+
 }
 
 unsigned long getRadioPWM(int ch_num) {
@@ -75,13 +78,18 @@ unsigned long getRadioPWM(int ch_num) {
   else if (ch_num == 6) {
     returnPWM = channel_6_raw;
   }
+  else if (ch_num == 7) {
+    returnPWM = channel_7_raw;
+  }
+  else if (ch_num == 8) {
+    returnPWM = channel_8_raw;
+  }
   
   return returnPWM;
 }
 
 //For DSM type receivers
-void serialEvent3(void)
-{
+void serialEvent3(void) {
   #if defined USE_DSM_RX
     while (Serial3.available()) {
         DSM.handleSerialEvent(Serial3.read(), micros());
@@ -131,6 +139,14 @@ void getPPM() {
   
     if (ppm_counter == 6) { //Sixth pulse
       channel_6_raw = dt_ppm;
+    }
+
+    if (ppm_counter == 7) { //Seventh pulse
+      channel_7_raw = dt_ppm;
+    }
+
+    if (ppm_counter == 8) { //Eighth pulse
+      channel_8_raw = dt_ppm;
     }
     
     ppm_counter = ppm_counter + 1;
@@ -196,3 +212,20 @@ void getCh6() {
     channel_6_raw = micros() - rising_edge_start_6;
   }
 }
+
+// void getMavlink(){
+//   /* Needed to send and receive MavLink data */
+//   mavlink.Update();
+//   /* Check to see if the mission has been updated and print mission items */
+//   if (mavlink.mission_updated()) {
+//     Serial.println(mavlink.num_mission_items());
+//     for (std::size_t i = 0; i < mavlink.num_mission_items(); i++) {
+//       Serial.print(mission[i].x);
+//       Serial.print("\t");
+//       Serial.print(mission[i].y);
+//       Serial.print("\t");
+//       Serial.print(mission[i].z);
+//       Serial.print("\n");
+//     }
+//   }
+// }
