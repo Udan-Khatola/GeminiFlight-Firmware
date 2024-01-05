@@ -177,29 +177,29 @@ float GyroErrorZ = 0.29;
 
 //Controller parameters (take note of defaults before modifying!): 
 float i_limit = 25.0;     //Integrator saturation level, mostly for safety (default 25.0)
-float maxRoll = 30.0;     //Max roll angle in degrees for angle mode (maximum ~70 degrees) (default=30), deg/sec for rate mode 
-float maxPitch = 30.0;    //Max pitch angle in degrees for angle mode (maximum ~70 degrees) (default=30), deg/sec for rate mode
-float maxYaw = 160.0;     //Max yaw rate in deg/sec (default=160)
+float maxRoll = 150.0;     //Max roll angle in degrees for angle mode (maximum ~70 degrees) (default=30), deg/sec for rate mode 
+float maxPitch = 150.0;    //Max pitch angle in degrees for angle mode (maximum ~70 degrees) (default=30), deg/sec for rate mode
+float maxYaw = 120.0;     //Max yaw rate in deg/sec (default=160)
 
-float Kp_roll_angle = 0.1;    //Roll P-gain - angle mode (default=0.2)
-float Ki_roll_angle = 0;    //Roll I-gain - angle mode (default=0.3)
-float Kd_roll_angle = 0;   //Roll D-gain - angle mode (has no effect on controlANGLE2) (default=0.05)
+float Kp_roll_angle = 0.2;    //Roll P-gain - angle mode (default=0.2)
+float Ki_roll_angle = 0.3;    //Roll I-gain - angle mode (default=0.3)
+float Kd_roll_angle = 0.05;   //Roll D-gain - angle mode (has no effect on controlANGLE2) (default=0.05)
 float B_loop_roll = 0.9;      //Roll damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
-float Kp_pitch_angle = 0.1;   //Pitch P-gain - angle mode (default=0.2)
-float Ki_pitch_angle = 0;   //Pitch I-gain - angle mode (default=0.3)
-float Kd_pitch_angle = 0;  //Pitch D-gain - angle mode (has no effect on controlANGLE2) (default=0.05)
+float Kp_pitch_angle = 0.2;   //Pitch P-gain - angle mode (default=0.2)
+float Ki_pitch_angle = 0.3;   //Pitch I-gain - angle mode (default=0.3)
+float Kd_pitch_angle = 0.05;  //Pitch D-gain - angle mode (has no effect on controlANGLE2) (default=0.05)
 float B_loop_pitch = 0.9;     //Pitch damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
 
-float Kp_roll_rate = 0.15;    //Roll P-gain - rate mode
-float Ki_roll_rate = 0.2;     //Roll I-gain - rate mode
-float Kd_roll_rate = 0.0002;  //Roll D-gain - rate mode (be careful when increasing too high, motors will begin to overheat!)
-float Kp_pitch_rate = 0.15;   //Pitch P-gain - rate mode
-float Ki_pitch_rate = 0.2;    //Pitch I-gain - rate mode
-float Kd_pitch_rate = 0.0002; //Pitch D-gain - rate mode (be careful when increasing too high, motors will begin to overheat!)
+float Kp_roll_rate = 0.10;    //Roll P-gain - rate mode (default=0.3)
+float Ki_roll_rate = 0;     //Roll I-gain - rate mode (default=0.2)
+float Kd_roll_rate = 0.00015;  //Roll D-gain - rate mode (default=0.0002)(be careful when increasing too high, motors will begin to overheat!)
+float Kp_pitch_rate = 0.10;   //Pitch P-gain - rate mode (default=0.3)
+float Ki_pitch_rate = 0;    //Pitch I-gain - rate mode (default=0.2)
+float Kd_pitch_rate = 0.00015; //Pitch D-gain - rate mode (default=0.0002)(be careful when increasing too high, motors will begin to overheat!)
 
-float Kp_yaw = 0.3;           //Yaw P-gain
-float Ki_yaw = 0.05;          //Yaw I-gain
-float Kd_yaw = 0.00015;       //Yaw D-gain (be careful when increasing too high, motors will begin to overheat!)
+float Kp_yaw = 0.2;           //Yaw P-gain (default=0.3)
+float Ki_yaw = 0.05;          //Yaw I-gain (default=0.05)
+float Kd_yaw = 0.00015;       //Yaw D-gain (default=0.00015) (be careful when increasing too high, motors will begin to overheat!) 
 
 
 
@@ -417,9 +417,9 @@ void loop() {
   getDesState(); //Convert raw commands to normalized values based on saturated control limits
   
   //PID Controller - SELECT ONE:
-  controlANGLE(); //Stabilize on angle setpoint
+  // controlANGLE(); //Stabilize on angle setpoint
   //controlANGLE2(); //Stabilize on angle setpoint using cascaded method. Rate controller must be tuned well first!
-  // controlRATE(); //Stabilize on rate setpoint
+  controlRATE(); //Stabilize on rate setpoint
 
   //Actuator mixing and scaling to PWM values
   controlMixer(); //Mixes PID outputs to scaled actuator commands -- custom mixing assignments done here
@@ -480,10 +480,10 @@ void controlMixer() {
   m6_command_scaled = 0;
 
   //0.5 is centered servo, 0.0 is zero throttle if connecting to ESC for conventional PWM, 1.0 is max throttle
-  s1_command_scaled = thro_des + pitch_PID - roll_PID - yaw_PID;
-  s2_command_scaled = thro_des + pitch_PID + roll_PID + yaw_PID;
-  s3_command_scaled = thro_des - pitch_PID + roll_PID - yaw_PID;
-  s4_command_scaled = thro_des - pitch_PID - roll_PID + yaw_PID;
+  s1_command_scaled = thro_des - pitch_PID - roll_PID - yaw_PID;
+  s2_command_scaled = thro_des - pitch_PID + roll_PID + yaw_PID;
+  s3_command_scaled = thro_des + pitch_PID + roll_PID - yaw_PID;
+  s4_command_scaled = thro_des + pitch_PID - roll_PID + yaw_PID;
   s5_command_scaled = 0;
   s6_command_scaled = 0;
   s7_command_scaled = 0;
@@ -911,7 +911,7 @@ void getDesState() {
    * yaw_passthru variables, to be used in commanding motors/servos with direct unstabilized commands in controlMixer().
    */
   thro_des = (channel_3_pwm - 1000.0)/1000.0; //Between 0 and 1
-  roll_des = -(channel_1_pwm - 1500.0)/500.0; //Between -1 and 1
+  roll_des = (channel_1_pwm - 1500.0)/500.0; //Between -1 and 1
   pitch_des = (channel_2_pwm - 1500.0)/500.0; //Between -1 and 1
   yaw_des = (channel_4_pwm - 1500.0)/500.0; //Between -1 and 1
   roll_passthru = roll_des/2.0; //Between -0.5 and 0.5
