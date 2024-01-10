@@ -160,46 +160,46 @@ float B_gyro = 0.17;       //Gyro LP filter paramter, (MPU6050 default: 0.1. MPU
 float B_mag = 1.0;        //Magnetometer LP filter parameter
 
 //Magnetometer calibration parameters - if using MPU9250, uncomment calibrateMagnetometer() in void setup() to get these values, else just ignore these
-float MagErrorX = -3.36;
-float MagErrorY = 6.97;
-float MagErrorZ = -29.42;
-float MagScaleX = 0.85;
-float MagScaleY = 1.11;
-float MagScaleZ = 1.09;
+float MagErrorX = -16.77;
+float MagErrorY = 5.00;
+float MagErrorZ = -17.22;
+float MagScaleX = 1.11;
+float MagScaleY = 1.07;
+float MagScaleZ = 0.86;
 
 //IMU calibration parameters - calibrate IMU using calculate_IMU_error() in the void setup() to get these values, then comment out calculate_IMU_error()
-float AccErrorX = 0.10;
-float AccErrorY = -0.02;
-float AccErrorZ = 0.02;
-float GyroErrorX = 0.94;
-float GyroErrorY = 0.14;
-float GyroErrorZ = 0.29;
+float AccErrorX = 0.07;
+float AccErrorY = 0.01;
+float AccErrorZ = 0.03;
+float GyroErrorX = 0.93;
+float GyroErrorY = 0.24;
+float GyroErrorZ = 0.28;
 
 //Controller parameters (take note of defaults before modifying!): 
 float i_limit = 25.0;     //Integrator saturation level, mostly for safety (default 25.0)
-float maxRoll = 150.0;     //Max roll angle in degrees for angle mode (maximum ~70 degrees) (default=30), deg/sec for rate mode 
-float maxPitch = 150.0;    //Max pitch angle in degrees for angle mode (maximum ~70 degrees) (default=30), deg/sec for rate mode
-float maxYaw = 120.0;     //Max yaw rate in deg/sec (default=160)
+float maxRoll = 30.0;     //Max roll angle in degrees for angle mode (maximum ~70 degrees) (default=30), deg/sec for rate mode 
+float maxPitch = 30.0;    //Max pitch angle in degrees for angle mode (maximum ~70 degrees) (default=30), deg/sec for rate mode
+float maxYaw = 160.0;     //Max yaw rate in deg/sec (default=160)
 
-float Kp_roll_angle = 0.09;    //Roll P-gain - angle mode (default=0.2)
-float Ki_roll_angle = 0;    //Roll I-gain - angle mode (default=0.3)
-float Kd_roll_angle = 0.03;   //Roll D-gain - angle mode (has no effect on controlANGLE2) (default=0.05)
+float Kp_roll_angle = 3*(0.03);    //Roll P-gain - angle mode (default=0.2)
+float Ki_roll_angle = 0*(0.045);    //Roll I-gain - angle mode (default=0.3)
+float Kd_roll_angle = 0*(0.0075);   //Roll D-gain - angle mode (has no effect on controlANGLE2) (default=0.05)
 float B_loop_roll = 0.9;      //Roll damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
-float Kp_pitch_angle = 0.09;   //Pitch P-gain - angle mode (default=0.2)
-float Ki_pitch_angle = 0;   //Pitch I-gain - angle mode (default=0.3)
-float Kd_pitch_angle = 0.03;  //Pitch D-gain - angle mode (has no effect on controlANGLE2) (default=0.05)
+float Kp_pitch_angle = 3*(0.03);   //Pitch P-gain - angle mode (default=0.2)
+float Ki_pitch_angle = 0*(0.045);   //Pitch I-gain - angle mode (default=0.3)
+float Kd_pitch_angle = 0*(0.0075);  //Pitch D-gain - angle mode (has no effect on controlANGLE2) (default=0.05)
 float B_loop_pitch = 0.9;     //Pitch damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
 
-float Kp_roll_rate = 0.05;    //Roll P-gain - rate mode (default=0.3)
+float Kp_roll_rate = 0.10;    //Roll P-gain - rate mode (default=0.3)
 float Ki_roll_rate = 0;     //Roll I-gain - rate mode (default=0.2)
 float Kd_roll_rate = 0.00015;  //Roll D-gain - rate mode (default=0.0002)(be careful when increasing too high, motors will begin to overheat!)
 float Kp_pitch_rate = 0.10;   //Pitch P-gain - rate mode (default=0.3)
 float Ki_pitch_rate = 0;    //Pitch I-gain - rate mode (default=0.2)
 float Kd_pitch_rate = 0.00015; //Pitch D-gain - rate mode (default=0.0002)(be careful when increasing too high, motors will begin to overheat!)
 
-float Kp_yaw = 0.15;           //Yaw P-gain (default=0.3)
-float Ki_yaw = 0;          //Yaw I-gain (default=0.05)
-float Kd_yaw = 0;       //Yaw D-gain (default=0.00015) (be careful when increasing too high, motors will begin to overheat!) 
+float Kp_yaw = 3*(0.045);           //Yaw P-gain (default=0.3)
+float Ki_yaw = 0*(0.0075);          //Yaw I-gain (default=0.05)
+float Kd_yaw = 0*(0.0000225);       //Yaw D-gain (default=0.00015) (be careful when increasing too high, motors will begin to overheat!) 
 
 
 
@@ -398,8 +398,8 @@ void loop() {
   // printRadioData();     //Prints radio pwm values (expected: 1000 to 2000)
   // printDesiredState();  //Prints desired vehicle state commanded in either degrees or deg/sec (expected: +/- maxAXIS for roll, pitch, yaw; 0 to 1 for throttle)
   // printGyroData();      //Prints filtered gyro data direct from IMU (expected: ~ -250 to 250, 0 at rest)
-  //printAccelData();     //Prints filtered accelerometer data direct from IMU (expected: ~ -2 to 2; x,y 0 when level, z 1 when level)
-  //printMagData();       //Prints filtered magnetometer data direct from IMU (expected: ~ -300 to 300)
+  // printAccelData();     //Prints filtered accelerometer data direct from IMU (expected: ~ -2 to 2; x,y 0 when level, z 1 when level)
+  // printMagData();       //Prints filtered magnetometer data direct from IMU (expected: ~ -300 to 300)
   // printRollPitchYaw();  //Prints roll, pitch, and yaw angles in degrees from Madgwick filter (expected: degrees, 0 when level)
   // printPIDoutput();     //Prints computed stabilized PID variables from controller and desired setpoint (expected: ~ -1 to 1)
   // printMotorCommands(); //Prints the values being written to the motors (expected: 120 to 250)
@@ -480,10 +480,10 @@ void controlMixer() {
   m6_command_scaled = 0;
 
   //0.5 is centered servo, 0.0 is zero throttle if connecting to ESC for conventional PWM, 1.0 is max throttle
-  s1_command_scaled = thro_des - pitch_PID - roll_PID - yaw_PID;
-  s2_command_scaled = thro_des - pitch_PID + roll_PID + yaw_PID;
-  s3_command_scaled = thro_des + pitch_PID + roll_PID - yaw_PID;
-  s4_command_scaled = thro_des + pitch_PID - roll_PID + yaw_PID;
+  s1_command_scaled = thro_des - pitch_PID - roll_PID + yaw_PID;
+  s2_command_scaled = thro_des - pitch_PID + roll_PID - yaw_PID;
+  s3_command_scaled = thro_des + pitch_PID + roll_PID + yaw_PID;
+  s4_command_scaled = thro_des + pitch_PID - roll_PID - yaw_PID;
   s5_command_scaled = 0;
   s6_command_scaled = 0;
   s7_command_scaled = 0;
@@ -1364,7 +1364,7 @@ void calibrateESCs() {
       s7_command_scaled = thro_des;
       scaleCommands(); //Scales motor commands to 125 to 250 range (oneshot125 protocol) and servo PWM commands to 0 to 180 (for servo library)
     
-      //throttleCut(); //Directly sets motor commands to low based on state of ch5
+      // throttleCut(); //Directly sets motor commands to low based on state of ch5
       
       servo1.write(s1_command_PWM); 
       servo2.write(s2_command_PWM);
@@ -1375,7 +1375,7 @@ void calibrateESCs() {
       servo7.write(s7_command_PWM);
       commandMotors(); //Sends command pulses to each motor pin using OneShot125 protocol
       
-      //printRadioData(); //Radio pwm values (expected: 1000 to 2000)
+      printRadioData(); //Radio pwm values (expected: 1000 to 2000)
       
       loopRate(2000); //Do not exceed 2000Hz, all filter parameters tuned to 2000Hz by default
    }
