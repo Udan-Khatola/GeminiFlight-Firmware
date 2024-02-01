@@ -1,10 +1,6 @@
 # GeminiFlight (forked from dRehmFlight)
 
-Currently forked to use proper Git flow for development. Long term focus on developing serial control from various supported companion computer platforms for extended autopilot ability in the software realm over the firmware realm.
-
-Simple configurable firmware, with complex high level general purpose software control is our philosophy. Similar high level architecture to Klipper. Intended to be primarily flown in autopilot mode with manual flight only to record flight plans. GeminiFlight's primary use is to automate and orchestrate repetitive aerial missions across many drones. If you just wanna have fun, use [Betaflight](https://betaflight.com/).
-
-Logged all my experiences in the Guides folder
+Currently forked to use proper Git flow for development. Long term focus on developing serial control from a Raspberry Pi for extended autopilot ability in the software realm over the firmware realm.
 
 ## Overview on dRehmFlight
 
