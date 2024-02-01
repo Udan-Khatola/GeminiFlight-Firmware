@@ -10,28 +10,6 @@ dRehmFlight has been used as a teaching tool for aircraft stabilization and flig
 
 This code is entirely free to use and will stay that way forever. We haven't made enough modifications yet to accept any donations but if you found this helpful for your own project, please donate to the OG of dRehmFlight and tell him I sent you: [Paypal Donation](https://www.paypal.me/NicholasRehm)
 
-
-### Hardware Requirements
-This flight controller is based off of the Teensy 4.0 microcontroller and MPU9250 9DOF IMU. The following components (available on Amazon) are required to complete the flight controller assembly:
-
-
-**Teensy 4.0**: https://amzn.to/3oFG3QN
-
-**Alternative Links**: [Sparkfun](https://www.sparkfun.com/products/15583), [Adafruit](https://www.adafruit.com/product/4323), [Electromaker](https://www.electromaker.io/shop/product/teensy-40?gclid=Cj0KCQjwxIOXBhCrARIsAL1QFCYcZsU4tRXVgeqfOOJyg_zPV2MXTeJM2QwJ6zafMTsCb6MjWthk7r8aAn6hEALw_wcB)
-
-Due to supply chain issues, the Teensy 4.0 has been frequently out of stock throughout 2022. The Teensy 4.1 is generally in stock more often and is immediately compatible with the dRehmFlight pin mappings (plus you get extra bonus pins!): https://amzn.to/3c1OSSw
-
-
-**GY-521 MPU6050 IMU**: https://amzn.to/3edF1Vn
-
-These (and all Amazon links contained within the supporting documentation) are Amazon Affiliate links; by purchasing from these, I receive a small portion of the revenue at no cost to you. I appreciate any and all support!
-
-### Software Requirments
-Code is uploaded to the board using the Arduino IDE; download the latest version here: https://www.arduino.cc/en/main/software
-
-To connect to the Teensy, you must also download and install the Teensyduino arduino add-on; download and instructions available here: https://www.pjrc.com/teensy/td_download.html
-
-
 ## Tutorial Videos
 [Building the Flight Controller Hardware](https://www.youtube.com/watch?v=EBXBEB-Xv7w&)
 
