@@ -38,8 +38,8 @@ Everyone that sends me pictures and videos of your flying creations! -Nick
 static const uint8_t num_DSM_channels = 6; //If using DSM RX, change this to match the number of transmitter channels you have
 
 //Uncomment only one IMU
-// #define USE_MPU6050_I2C //Default
-#define USE_MPU9250_SPI
+#define USE_MPU6050_I2C //Default
+// #define USE_MPU9250_SPI
 
 //Uncomment only one full scale gyro range (deg/sec)
 #define GYRO_250DPS //Default
@@ -155,8 +155,8 @@ unsigned long channel_6_fs = 1000; //aux1
 
 //Filter parameters - Defaults tuned for 2kHz loop rate; Do not touch unless you know what you are doing:
 float B_madgwick = 0.04;  //Madgwick filter parameter
-float B_accel = 0.2;     //Accelerometer LP filter paramter, (MPU6050 default: 0.14. MPU9250 default: 0.2)
-float B_gyro = 0.17;       //Gyro LP filter paramter, (MPU6050 default: 0.1. MPU9250 default: 0.17)
+float B_accel = 0.14;     //Accelerometer LP filter paramter, (MPU6050 default: 0.14. MPU9250 default: 0.2)
+float B_gyro = 0.1;       //Gyro LP filter paramter, (MPU6050 default: 0.1. MPU9250 default: 0.17)
 float B_mag = 1.0;        //Magnetometer LP filter parameter
 
 //Magnetometer calibration parameters - if using MPU9250, uncomment calibrateMagnetometer() in void setup() to get these values, else just ignore these
@@ -168,38 +168,38 @@ float MagScaleY = 1.07;
 float MagScaleZ = 0.86;
 
 //IMU calibration parameters - calibrate IMU using calculate_IMU_error() in the void setup() to get these values, then comment out calculate_IMU_error()
-float AccErrorX = 0.04;
-float AccErrorY = 0.01;
-float AccErrorZ = 0.03;
-float GyroErrorX = 1.02;
-float GyroErrorY = 0.18;
-float GyroErrorZ = 0.22;
+float AccErrorX = -0.01;
+float AccErrorY = 0.05;
+float AccErrorZ = 0.08;
+float GyroErrorX = -2.53;
+float GyroErrorY = 0.97;
+float GyroErrorZ = -0.59;
 
 //Controller parameters (take note of defaults before modifying!): 
 float i_limit = 25.0;     //Integrator saturation level, mostly for safety (default 25.0)
-float maxRoll = 30.0;     //Max roll angle in degrees for angle mode (maximum ~70 degrees) (default=30), deg/sec for rate mode 
-float maxPitch = 30.0;    //Max pitch angle in degrees for angle mode (maximum ~70 degrees) (default=30), deg/sec for rate mode
-float maxYaw = 160.0;     //Max yaw rate in deg/sec (default=160)
+float maxRoll = 150.0;     //Max roll angle in degrees for angle mode (maximum ~70 degrees) (default=30), deg/sec for rate mode 
+float maxPitch = 150.0;    //Max pitch angle in degrees for angle mode (maximum ~70 degrees) (default=30), deg/sec for rate mode
+float maxYaw = 120.0;     //Max yaw rate in deg/sec (default=160)
 
-float Kp_roll_angle = 100*(0.2/100);    //Roll P-gain - angle mode
-float Ki_roll_angle = 100*(0.3/100);    //Roll I-gain - angle mode
-float Kd_roll_angle = 100*(0.05/100);   //Roll D-gain - angle mode (has no effect on controlANGLE2)
-float B_loop_roll = 0.9;      //Roll damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
-float Kp_pitch_angle = 100*(0.2/100);   //Pitch P-gain - angle mode 
-float Ki_pitch_angle = 100*(0.3/100);   //Pitch I-gain - angle mode
-float Kd_pitch_angle = 100*(0.05/100);  //Pitch D-gain - angle mode (has no effect on controlANGLE2)
-float B_loop_pitch = 0.9;     //Pitch damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
+float Kp_roll_angle = 40*(0.2/100);    //Roll P-gain - angle mode
+float Ki_roll_angle = 40*(0.3/100);    //Roll I-gain - angle mode
+float Kd_roll_angle = 120*(0.05/100);   //Roll D-gain - angle mode (has no effect on controlANGLE2)
+float B_loop_roll = 0.1;      //Roll damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
+float Kp_pitch_angle = 40*(0.2/100);   //Pitch P-gain - angle mode 
+float Ki_pitch_angle = 40*(0.3/100);   //Pitch I-gain - angle mode
+float Kd_pitch_angle = 120*(0.05/100);  //Pitch D-gain - angle mode (has no effect on controlANGLE2)
+float B_loop_pitch = 0.1;     //Pitch damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
 
 float Kp_roll_rate = 50*(0.3/100);    //Roll P-gain - rate mode
-float Ki_roll_rate = 0*(0.2/100);     //Roll I-gain - rate mode
+float Ki_roll_rate = 20*(0.2/100);     //Roll I-gain - rate mode
 float Kd_roll_rate = 0*(0.0002/100);  //Roll D-gain - rate mode (be careful when increasing too high, motors will begin to overheat!)
-float Kp_pitch_rate = 50*(0.2/100);   //Pitch P-gain - rate mode
-float Ki_pitch_rate = 0*(0.2/100);    //Pitch I-gain - rate mode
+float Kp_pitch_rate = 50*(0.3/100);   //Pitch P-gain - rate mode
+float Ki_pitch_rate = 20*(0.2/100);    //Pitch I-gain - rate mode
 float Kd_pitch_rate = 0*(0.0002/100); //Pitch D-gain - rate mode (be careful when increasing too high, motors will begin to overheat!)
 
-float Kp_yaw = 100*(0.3/100);           //Yaw P-gain (default=0.3)
+float Kp_yaw = 60*(0.3/100);           //Yaw P-gain (default=0.3)
 float Ki_yaw = 100*(0.05/100);          //Yaw I-gain (default=0.05)
-float Kd_yaw = 100*(0.00015/100);       //Yaw D-gain (default=0.00015) (be careful when increasing too high, motors will begin to overheat!) 
+float Kd_yaw = 120*(0.00015/100);       //Yaw D-gain (default=0.00015) (be careful when increasing too high, motors will begin to overheat!) 
 
 
 
@@ -417,9 +417,9 @@ void loop() {
   getDesState(); //Convert raw commands to normalized values based on saturated control limits
   
   //PID Controller - SELECT ONE:
-  controlANGLE(); //Stabilize on angle setpoint
+  // controlANGLE(); //Stabilize on angle setpoint
   // controlANGLE2(); //Stabilize on angle setpoint using cascaded method. Rate controller must be tuned well first!
-  // controlRATE(); //Stabilize on rate setpoint
+  controlRATE(); //Stabilize on rate setpoint
 
   //Actuator mixing and scaling to PWM values
   controlMixer(); //Mixes PID outputs to scaled actuator commands -- custom mixing assignments done here
@@ -480,10 +480,10 @@ void controlMixer() {
   m6_command_scaled = 0;
 
   //0.5 is centered servo, 0.0 is zero throttle if connecting to ESC for conventional PWM, 1.0 is max throttle
-  s1_command_scaled = thro_des - pitch_PID - roll_PID + yaw_PID;
-  s2_command_scaled = thro_des - pitch_PID + roll_PID - yaw_PID;
-  s3_command_scaled = thro_des + pitch_PID + roll_PID + yaw_PID;
-  s4_command_scaled = thro_des + pitch_PID - roll_PID - yaw_PID;
+  s1_command_scaled = thro_des - pitch_PID - roll_PID - yaw_PID;
+  s2_command_scaled = thro_des - pitch_PID + roll_PID + yaw_PID;
+  s3_command_scaled = thro_des + pitch_PID + roll_PID - yaw_PID;
+  s4_command_scaled = thro_des + pitch_PID - roll_PID + yaw_PID;
   s5_command_scaled = 0;
   s6_command_scaled = 0;
   s7_command_scaled = 0;
