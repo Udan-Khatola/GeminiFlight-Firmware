@@ -169,11 +169,11 @@ float MagScaleZ = 0.86;
 
 //IMU calibration parameters - calibrate IMU using calculate_IMU_error() in the void setup() to get these values, then comment out calculate_IMU_error()
 float AccErrorX = -0.01;
-float AccErrorY = 0.05;
-float AccErrorZ = 0.08;
-float GyroErrorX = -2.53;
-float GyroErrorY = 0.97;
-float GyroErrorZ = -0.59;
+float AccErrorY = 0.01;
+float AccErrorZ = 0.09;
+float GyroErrorX = -2.42;
+float GyroErrorY = 1.14;
+float GyroErrorZ = -0.84;
 
 //Controller parameters (take note of defaults before modifying!): 
 float i_limit = 25.0;     //Integrator saturation level, mostly for safety (default 25.0)
@@ -190,14 +190,14 @@ float Ki_pitch_angle = 40*(0.3/100);   //Pitch I-gain - angle mode
 float Kd_pitch_angle = 120*(0.05/100);  //Pitch D-gain - angle mode (has no effect on controlANGLE2)
 float B_loop_pitch = 0.1;     //Pitch damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
 
-float Kp_roll_rate = 20*(0.3/100);    //Roll P-gain - rate mode
-float Ki_roll_rate = 15*(0.2/100);     //Roll I-gain - rate mode
+float Kp_roll_rate = 50*(0.3/100);    //Roll P-gain - rate mode
+float Ki_roll_rate = 0*(0.2/100);     //Roll I-gain - rate mode
 float Kd_roll_rate = 0*(0.0002/100);  //Roll D-gain - rate mode (be careful when increasing too high, motors will begin to overheat!)
-float Kp_pitch_rate = 20*(0.3/100);   //Pitch P-gain - rate mode
-float Ki_pitch_rate = 15*(0.2/100);    //Pitch I-gain - rate mode
+float Kp_pitch_rate = 50*(0.3/100);   //Pitch P-gain - rate mode
+float Ki_pitch_rate = 0*(0.2/100);    //Pitch I-gain - rate mode
 float Kd_pitch_rate = 0*(0.0002/100); //Pitch D-gain - rate mode (be careful when increasing too high, motors will begin to overheat!)
 
-float Kp_yaw = 20*(0.3/100);           //Yaw P-gain (default=0.3)
+float Kp_yaw = 50*(0.3/100);           //Yaw P-gain (default=0.3)
 float Ki_yaw = 0*(0.05/100);          //Yaw I-gain (default=0.05)
 float Kd_yaw = 0*(0.00015/100);       //Yaw D-gain (default=0.00015) (be careful when increasing too high, motors will begin to overheat!) 
 
@@ -347,7 +347,7 @@ void setup() {
   delay(5);
 
   //Get IMU error to zero accelerometer and gyro readings, assuming vehicle is level when powered up
-  // calculate_IMU_error(); //Calibration parameters printed to serial monitor. Paste these in the user specified variables section, then comment this out forever.
+  calculate_IMU_error(); //Calibration parameters printed to serial monitor. Paste these in the user specified variables section, then comment this out forever.
 
   //Arm servo channels
   servo1.write(0); //Command servo angle from 0-180 degrees (1000 to 2000 PWM)
